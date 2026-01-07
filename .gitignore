@@ -1,0 +1,15 @@
+# .gitignore
+
+# Ignora l'ambiente virtuale
+venv/
+env/
+
+# Ignora i file compilati di Python
+__pycache__/
+*.py[cod]
+
+# Ignora il database locale (per sicurezza)
+db.sqlite3
+
+# Ignora file di sistema Mac
+.DS_Store
