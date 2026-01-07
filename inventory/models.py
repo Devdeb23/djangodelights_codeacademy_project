@@ -4,7 +4,7 @@ from django.db import models
 # Questo modello rappresenta il magazzino degli ingredienti disponibili per la preparazione dei piatti.
 # Esempio : "Uova", quantità 100, prezzo unitario : 0.50
 class Ingredient(models.Model):
-    name = models.CharField(max_lenghth=200)
+    name = models.CharField(max_length=200)
     quantity = models.FloatField(default=0)  # Quantità disponibile in magazzino
     unit_price = models.FloatField(default=0)
 
@@ -18,7 +18,7 @@ class MenuItem(models.Model):
     title = models.CharField(max_length=200)
     price = models.FloatField(default=0)
 
-    def __str__(sefl):
+    def __str__(self):
         return self.title
     
 # 3 RICETTA (collegamento tra MenuItem e Ingredient)
@@ -30,4 +30,14 @@ class RecipeRequirement(models.Model):
 
     def __str__(self):
         return f"Order: {self.menu.title}"
+    
+# 4 ACQUISTI
+# Registra quando un cliente compra un piatto dal menu (scontrini)
+class Purchase(models.Model):
+    menu_item = models.ForeignKey(MenuItem, on_delete = models.CASCADE) 
+    timestamp = models.DateTimeField(auto_now_add=True) #Salva data e ora dell'acquisto
+
+    def __str (self):
+        return f"Order: {self.menu_item.title} at {self.timestamp}"
+
     
